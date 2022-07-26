@@ -6122,10 +6122,10 @@ router.get('/textpro/leao', async (req, res, next) => {
       .textpro("https://textpro.me/create-lion-logo-mascot-online-938.html", [
         text, text2
       ])
+       foto = await fetch(data).then(v => v.buffer());
+       fs.writeFileSync(__path + '/tmp/foto.jpeg', data)
       .then((data) => {
-        res.json( resultado: {
-          url: data
-        })
+    res.sendFile(__path + '/tmp/foto.jpeg');
       })
       .catch((err) => console.log(err));
   } else {
