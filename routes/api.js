@@ -6105,6 +6105,24 @@ router.get('/textpro/ninjalogo', async (req, res, next) => {
     res.json(loghandler.invalidKey)
   }
 });
+const getBuffer = async (url, options) => {
+	try {
+		options ? options : {}
+		const res = await axios({
+			method: "get",
+			url,
+			headers: {
+				'DNT': 1,
+				'Upgrade-Insecure-Request': 1
+			},
+			...options,
+			responseType: 'arraybuffer'
+		})
+		return res.data
+	} catch (err) {
+		return err
+	}
+}
 
 router.get('/textpro/leao', async (req, res, next) => {
 
@@ -6122,10 +6140,10 @@ router.get('/textpro/leao', async (req, res, next) => {
       .textpro("https://textpro.me/create-lion-logo-mascot-online-938.html", [
         text, text2
       ])
-       foto = await fetch(data).then(v => v.buffer());
-       fs.writeFileSync(__path + '/tmp/foto.jpeg', data)
+       
       .then((data) => {
-    res.sendFile(__path + '/tmp/foto.jpeg');
+        texproimg = getBuffer(data)
+       res.sendFile(texproimg)
       })
       .catch((err) => console.log(err));
   } else {
