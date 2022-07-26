@@ -6106,7 +6106,7 @@ router.get('/textpro/ninjalogo', async (req, res, next) => {
   }
 });
 
-router.get('/textpro/l', async (req, res, next) => {
+router.get('/textpro/leao', async (req, res, next) => {
 
   const apikey = req.query.apikey;
 
@@ -6123,11 +6123,8 @@ router.get('/textpro/l', async (req, res, next) => {
         text, text2
       ])
       .then((data) => {
-        res.json({
-          status: true,
-          codigo: 200,
-          criador: `${creator}`,
-          resultado: data
+        res.json( resultado: {
+          url: data
         })
       })
       .catch((err) => console.log(err));
